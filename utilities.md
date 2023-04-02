@@ -111,25 +111,4 @@ await sourceToken.update(targetTokenLocation);
 await targetToken.update(sourceTokenLocation);
 ```
 
-## Token Image
 
-```js
-const a = "PATH TO IMAGE A"
-const b = "PATH TO IMAGE B"
-const src = token.document.texture.src === a ? b : a
-await token.document.update({"texture.src": src})
-```
-### Invisibility
-
-```js
- active = !GURPS.LastActor.effects.some(e => e.flags.core.statusId === "invisible")
-GURPS.LastTokenDocument.toggleActiveEffect({id: "invisible", icon: "icons/svg/invisible.svg", label: "EFFECT.StatusInvisible"}, {active: active})
-```
-
-## Iframe
-
-### Site on Journal
-
-```html
-<div style="overflow: hidden; padding-top: 100%; position: relative;"><iframe style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%;" src="https://crobi.github.io/dnd5e-quickref/preview/quickref.html" width="100%" height="100%" allowfullscreen="true;"></iframe></div>
-```

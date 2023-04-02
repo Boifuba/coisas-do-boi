@@ -15,3 +15,28 @@ async function rename(token) {
 }
   canvas.tokens.controlled.map(token => rename(token));
   ```
+
+  ## Prototype name = actor name 
+  ```js 
+  const updates = game.actors.map(a => ({
+    _id: a.id,
+    "prototypeToken.name": a.name
+}));
+Actor.updateDocuments(updates);
+console.log(updates.length, "nomes foram alterados")
+```
+
+## Token Image
+
+```js
+const a = "PATH TO IMAGE A"
+const b = "PATH TO IMAGE B"
+const src = token.document.texture.src === a ? b : a
+await token.document.update({"texture.src": src})
+```
+## Invisibility
+
+```js
+ active = !GURPS.LastActor.effects.some(e => e.flags.core.statusId === "invisible")
+GURPS.LastTokenDocument.toggleActiveEffect({id: "invisible", icon: "icons/svg/invisible.svg", label: "EFFECT.StatusInvisible"}, {active: active})
+```
