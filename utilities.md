@@ -3,8 +3,10 @@
 ```js
 await canvas.lighting.updateAll({"config.animation.type": "torch",  "config.animation.intensity": 2, "config.animation.speed": 5});
 ```
-### Turn on//off lights
+### Turn on/off lights
 ```js
+//passing args through function 
+
 function lights(){
     if (args === "on") {
       canvas.lighting.updateAll({hidden: false});
@@ -19,6 +21,8 @@ function lights(){
 const s = token.document.width === 1 ? 2 : 1;
 await token.document.update({width: s, height: s});
 ```
+## Macros
+
 ### Active macros
 ```js
 let mods = '';
@@ -49,6 +53,10 @@ let d = new Dialog({
 
 d.render(true);
 ```
+
+
+
+
 ### One macro calling other macros
 ```js
 let map = {
@@ -70,6 +78,10 @@ let src = canvas.scene.background.src === sceneA ? sceneB : sceneA;
  await canvas.scene.update({"background.src": src});
 
  ```
+
+
+
+
  ## Sound
  ### Random Sound
  ```js
@@ -77,4 +89,47 @@ let src = canvas.scene.background.src === sceneA ? sceneB : sceneA;
 const soundDocs = pl.sounds.contents
 const randomSound = soundDocs[Math.floor(Math.random() * soundDocs.length)];
 await pl.playSound(randomSound);
+```
+
+
+## Tokens
+
+### Delete all tokens on map 
+
+```js
+await Promise.all(game.scenes.map(s=> { return s.deleteEmbeddedDocuments("Token", s.tokens.filter(i=>i.actor?.id==actor.id).map(t=>t._id))}))
+```
+
+### Swap places
+
+```js
+const sourceToken = token.document;
+const targetToken = game.user.targets.first().document;
+const sourceTokenLocation = {x: sourceToken.x, y: sourceToken.y};
+const targetTokenLocation = {x: targetToken.x, y: targetToken.y};
+await sourceToken.update(targetTokenLocation);
+await targetToken.update(sourceTokenLocation);
+```
+
+## Token Image
+
+```js
+const a = "PATH TO IMAGE A"
+const b = "PATH TO IMAGE B"
+const src = token.document.texture.src === a ? b : a
+await token.document.update({"texture.src": src})
+```
+### Invisibility
+
+```js
+ active = !GURPS.LastActor.effects.some(e => e.flags.core.statusId === "invisible")
+GURPS.LastTokenDocument.toggleActiveEffect({id: "invisible", icon: "icons/svg/invisible.svg", label: "EFFECT.StatusInvisible"}, {active: active})
+```
+
+## Iframe
+
+### Site on Journal
+
+```html
+<div style="overflow: hidden; padding-top: 100%; position: relative;"><iframe style="border: 0; height: 100%; left: 0; position: absolute; top: 0; width: 100%;" src="https://crobi.github.io/dnd5e-quickref/preview/quickref.html" width="100%" height="100%" allowfullscreen="true;"></iframe></div>
 ```
