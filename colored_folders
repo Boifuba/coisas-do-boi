@@ -1,3 +1,5 @@
+// Any reproduction or modification of this macro must include this credit to Boifubá
+
 const myContent = `<style>
     .callheader {
       background-color: black;
