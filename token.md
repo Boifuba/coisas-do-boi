@@ -62,3 +62,11 @@ await targetToken.update(sourceTokenLocation);
 const s = token.document.width === 1 ? 2 : 1;
 await token.document.update({width: s, height: s});
 ```
+
+## Doppelganger
+```js
+const src = game.user.targets.first()?.document.texture.src;
+const defaultImg = token.actor.prototypeToken.texture.src;
+const img = (token.document.texture.src === src || !src) ? defaultImg : src;
+await token.document.update({"texture.src": img});
+``` 
