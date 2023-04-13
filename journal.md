@@ -25,3 +25,37 @@ const updates = game.actors.map(a => ({
 Actor.updateDocuments(updates);
 console.log(updates.length, "nomes foram alterados")
 ```
+
+
+### Sorteia 5 itens da primeira coluna em uma tabela que estiver dentro de um journal
+
+```js
+const firstTdContents = [];
+
+const page = game.journal.get("LiaHIKDjrDENzQBP").pages.get("cJRV8e30RpXpHjEi");
+const html = page.text.content;
+
+// Crie um elemento de div temporário e defina o conteúdo HTML para o conteúdo de texto da página
+const tempDiv = document.createElement('div');
+tempDiv.innerHTML = html;
+
+// Encontre todos os elementos <td> na primeira coluna da tabela
+const tdElements = tempDiv.querySelectorAll('td:first-child');
+
+// Crie uma matriz aleatória de índices para os elementos <td>
+const indices = [];
+while (indices.length < 5 && indices.length < tdElements.length) {
+  const index = Math.floor(Math.random() * tdElements.length);
+  if (!indices.includes(index)) {
+    indices.push(index);
+  }
+}
+
+// Obtenha o conteúdo de texto dos cinco primeiros elementos <td> selecionados aleatoriamente
+indices.forEach((index) => {
+  firstTdContents.push(tdElements[index].textContent.trim());
+});
+ChatMessage.create({ content: firstTdContents.map((name, index) => `${index + 1}. ${name}`).join("<br>") });
+
+console.log(firstTdContents);
+```
