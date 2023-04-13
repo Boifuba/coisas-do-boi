@@ -82,3 +82,9 @@ ui.notifications.error('ACESSO NEGADO!!!');
 });
 });
 ```
+EXEMPLO DO FORM:
+```html
+<div class="master-container" style="width: 300px;">Login <input id="nome" name="nome" type="text">
+<p>Senha <input id="senha" name="nome" type="text"></p>
+&nbsp; &nbsp; <button class="journal_button">Enviar</button></div>
+```
