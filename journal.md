@@ -59,3 +59,26 @@ ChatMessage.create({ content: firstTdContents.map((name, index) => `${index + 1}
 
 console.log(firstTdContents);
 ```
+
+### Login dentro do Journal
+
+Crie um form  de login e senha e quando pressionar o botão o codigo vai substituir o html do journal 
+ps: os inputs e botões tem que ser simples sem nenhum type definido e o botão tem que ser role=button
+```js
+Hooks.on("renderJournalPageSheet", (app, html, datal) => {
+let button = html.find(".journal_button");
+const nomeInput = document.getElementById("nome");
+const senhaInput = document.getElementById("senha");
+const display = document.querySelector('.master-container');
+
+button.click(() => {
+if (nomeInput.value === 'user' && senhaInput.value === '123') {
+const novoConteudo = `INSIRA O HTML AQUI E FODA-SE`
+display.innerHTML = novoConteudo;
+html.find("#login-form").remove();
+} else {
+ui.notifications.error('ACESSO NEGADO!!!');
+}
+});
+});
+```
