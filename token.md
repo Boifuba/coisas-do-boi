@@ -81,7 +81,8 @@ const swapTokenPositions = async (tokens) => {
 
 swapTokenPositions(canvas.tokens.controlled);
 
-```js
+```
+
 ## Change sizes
 ```js
 const s = token.document.width === 1 ? 2 : 1;
